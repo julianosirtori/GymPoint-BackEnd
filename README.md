@@ -1,9 +1,9 @@
-"# GymPoint-BackEnd" 
+# GymPoint-BackEnd
 
 
 
 ### Install Dependencies
-yarn installr
+- yarn installr
 
 
 ### Migrations
@@ -12,6 +12,6 @@ yarn installr
 
 
 ### Running Developer Server
-yarn dev
+- yarn dev
 
 
