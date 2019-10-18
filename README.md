@@ -1,4 +1,17 @@
 "# GymPoint-BackEnd" 
 
 
-yarn add sucrase nodemon -D
+
+### Install Dependencies
+yarn installr
+
+
+### Migrations
+- Running: yarn sequelize-cli db:migrate
+- Undoing: yarn sequelize-cli db:migrate:undo
+
+
+### Running Developer Server
+yarn dev
+
+
