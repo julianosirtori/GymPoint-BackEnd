@@ -8,11 +8,16 @@ import StudentController from './app/controllers/StudentController';
 import PlanController from './app/controllers/PlanController';
 import RegistrationController from './app/controllers/RegistrationController';
 import CheckinController from './app/controllers/CheckinController';
+import HelpOrderController from './app/controllers/HelpOrderController';
+import AnswerHelpOrderController from './app/controllers/AnswerHelpOrderController';
 
 const routes = new Router();
 
 routes.post('/students/:student_id/checkins', CheckinController.store);
 routes.get('/students/:student_id/checkins', CheckinController.index);
+
+routes.post('/students/:student_id/help-orders', HelpOrderController.store);
+routes.get('/students/:student_id/help-orders', HelpOrderController.index);
 
 routes.post('/sessions', SessionController.store);
 routes.use(authMiddleware);
@@ -35,5 +40,8 @@ routes.get('/registrations', RegistrationController.index);
 routes.get('/registrations/:id', RegistrationController.show);
 routes.put('/registrations/:id', RegistrationController.update);
 routes.delete('/registrations/:id', RegistrationController.delete);
+
+routes.get('/help-orders', AnswerHelpOrderController.index);
+routes.post('/help-orders/:id/answer', AnswerHelpOrderController.store);
 
 export default routes;
