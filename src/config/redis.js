@@ -1,4 +1,4 @@
 export default {
-  host: 'localhost',
-  port: '6379',
+  host: process.env.REDIST_HOST,
+  port: process.env.REDIST_PORT,
 };
