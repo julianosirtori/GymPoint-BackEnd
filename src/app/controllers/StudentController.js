@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import Student from '../models/Student';
 
 class StudentController {
@@ -19,7 +20,21 @@ class StudentController {
   }
 
   async index(req, res) {
-    const students = await Student.findAll();
+    const { page = 1, search = '' } = req.query;
+    const students = await Student.findAll({
+      where: {
+        [Op.or]: [
+          {
+            name: {
+              [Op.like]: `%${search}%`,
+            },
+          },
+        ],
+      },
+      limit: 20,
+      offset: (page - 1) * 20,
+      order: ['name'],
+    });
     res.json(students);
   }
 

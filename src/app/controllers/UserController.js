@@ -1,6 +1,26 @@
+import { Op } from 'sequelize';
 import User from '../models/User';
 
 class UserController {
+  async index(req, res) {
+    const { page = 1, search = '' } = req.query;
+    const users = await User.findAll({
+      where: {
+        [Op.or]: [
+          {
+            name: {
+              [Op.like]: `%${search}%`,
+            },
+          },
+        ],
+      },
+      limit: 20,
+      offset: (page - 1) * 20,
+      order: ['name'],
+    });
+    res.json(users);
+  }
+
   async store(req, res) {
     const userExists = await User.findOne({ where: { email: req.body.email } });
     if (userExists) {
