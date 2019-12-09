@@ -52,7 +52,7 @@ class RegistrationController {
   }
 
   async index(req, res) {
-    const { page } = req.query;
+    const { page = 1 } = req.query;
     const registrations = await Registration.findAll({
       limit: 20,
       offset: (page - 1) * 20,
@@ -76,7 +76,21 @@ class RegistrationController {
 
   async show(req, res) {
     const { id } = req.params;
-    const registration = await Registration.findByPk(id);
+    const registration = await Registration.findByPk(id, {
+      attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
+      include: [
+        {
+          model: Plan,
+          as: 'plan',
+          attributes: ['id', 'title', 'duration', 'price'],
+        },
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['id', 'name'],
+        },
+      ],
+    });
     if (!registration) {
       return res.status(400).json('Registration not found');
     }
