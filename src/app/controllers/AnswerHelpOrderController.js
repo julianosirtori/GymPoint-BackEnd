@@ -1,4 +1,5 @@
 import HelpOrder from '../models/HelpOrder';
+import Student from '../models/Student';
 
 class AnswerHelpOrderController {
   async store(req, res) {
@@ -11,7 +12,16 @@ class AnswerHelpOrderController {
   }
 
   async index(req, res) {
-    const helporders = await HelpOrder.findAll();
+    const helporders = await HelpOrder.findAll({
+      where: [{ answer: null }],
+      include: [
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['id', 'name'],
+        },
+      ],
+    });
     return res.json(helporders);
   }
 }
