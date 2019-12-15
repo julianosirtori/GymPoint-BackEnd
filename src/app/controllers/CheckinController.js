@@ -26,6 +26,7 @@ class CheckinController {
 
     const checkins = await Checkin.findAll({
       where: { student_id },
+      order: [['id', 'DESC']],
     });
     return res.json(checkins);
   }

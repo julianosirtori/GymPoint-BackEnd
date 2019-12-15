@@ -2,7 +2,7 @@ import Mail from '../../lib/Mail';
 
 class RegistrationMail {
   get key() {
-    return 'CancellationMail';
+    return 'RegistrationMail';
   }
 
   async handle({ data }) {

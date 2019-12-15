@@ -26,7 +26,7 @@ class StudentController {
         [Op.or]: [
           {
             name: {
-              [Op.like]: `%${search}%`,
+              [Op.iLike]: `%${search}%`,
             },
           },
         ],
