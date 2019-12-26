@@ -1,7 +1,6 @@
 import { Op } from 'sequelize';
-import { subDays, parseISO } from 'date-fns';
+import { subDays } from 'date-fns';
 
-import { response } from 'express';
 import Checkin from '../models/Checkin';
 import Student from '../models/Student';
 
