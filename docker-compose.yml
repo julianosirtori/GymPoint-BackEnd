@@ -1,0 +1,36 @@
+version: '2.1'
+
+services:
+  backend:
+    image: backend
+    build: .
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3333:3333
+    env_file: .env
+    depends_on:
+      - postgres
+      - mongodb
+      - redis
+    command: 'npm sequelize-cli db:migrate'
+  postgres:
+    image: postgres:10.11
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: gympoint
+      POSTGRES_PASSWORD: '123456'
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+  redis:
+    image: redis:4.0.5-alpine
+    restart: always
+    ports:
+      - 6379:6379
+
+
